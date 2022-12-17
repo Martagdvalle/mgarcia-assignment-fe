@@ -54,7 +54,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'mgarcia-assignment-fe-pr'
+          app-name: 'mgarcia-assignment-fe-prod'
           package: .
 
   deploy-dev:
@@ -79,5 +79,5 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'mgarcia-assignment-fe-dv'
+          app-name: 'mgarcia-assignment-fe-dev'
           package: .

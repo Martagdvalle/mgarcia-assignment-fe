@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Skull from '../components/Skull.vue'
-import AppAccounts from '../components/AppAccounts.vue'
+import AppRecipes from '.../components/Recipes.vue'
 
 Vue.use(VueRouter)
 
@@ -12,9 +12,9 @@ const routes = [
     component: Skull
   },
   {
-    path: '/accounts',
-    name: 'AppAccounts',
-    component: AppAccounts
+    path: '/',
+    name: 'AppRecipes',
+    component: AppRecipes
   }
 ]
 
