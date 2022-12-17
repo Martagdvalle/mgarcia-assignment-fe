@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Skull from '../components/Skull.vue'
-import AppRecipes from '.../components/Recipes.vue'
+import AppRecipes from '.../components/AppRecipes.vue'
 
 Vue.use(VueRouter)
 
