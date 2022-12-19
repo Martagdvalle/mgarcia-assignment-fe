@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <h1>Recipes</h1>
+          <h1>Marta's Recipes Book</h1>
           <hr />
           <br />
           <!-- Allert Message -->
@@ -17,7 +17,7 @@
             class="btn btn-success btn-sm"
             v-b-modal.recipe-modal
           >
-            Create Recipe
+            Add a Recipe
           </button>
           <br /><br />
           <table class="table table-hover">
@@ -70,7 +70,7 @@
       <b-modal
         ref="addRecipeModal"
         id="recipe-modal"
-        title="Create a new recipe"
+        title="Add a new recipe"
         hide-backdrop
         hide-footer
       >
