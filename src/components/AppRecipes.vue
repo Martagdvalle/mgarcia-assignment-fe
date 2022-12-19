@@ -36,7 +36,19 @@
                 <td>{{ recipe.name }}</td>
                 <td>{{ recipe.ingredients }}</td>
                 <td>{{ recipe.steps }}</td>
-                <td><b-form-rating v-model="account.rate" readonly variant="warning"> </b-form-rating></td>
+                <td> 
+                    <div>
+                    <b-form-rating v-model= "recipe.rating" readonly variant="warning" class="mb-2"></b-form-rating>
+                    <p class="mt-2"></p>
+                    </div> 
+                     </td>
+                <td>
+                    <b-icon 
+                    v-if="recipe.favorite == true" icon="heart-fill">
+                    </b-icon>
+                    <b-icon v-if="(recipe.favorite == false)" icon="heart">
+                    </b-icon>
+                    </td>
                 <td>
                   <input type="checkbox" class="checkbox" v-model="recipe.favorite" />
                 </td>
@@ -63,7 +75,7 @@
             </tbody>
           </table>
           <footer class="text-center">
-            Copyright &copy; Marta García del Valle - All Rights Reserved.
+            Copyright &copy; Marta Garcia del valle - All Rights Reserved.
           </footer>
         </div>
       </div>
@@ -115,35 +127,35 @@
               placeholder="Recipe Steps"
               required
             >
-            <b-form-group 
-            id="form-rate-group" 
-            label="Please select a value from the range 0 to 5:" 
-            label-for="form-rate-input">
-            <b-form-rating 
-            id="form-rate-input" 
-            v-model="createAccountForm.rate" variant="warning" show-value>
-            </b-form-rating>
-          </b-form-group>
-
             </b-form-input>
           </b-form-group>
-          <b-form-group
-            id="form-favorite-group"
-            label="Recipe Favorite:"
-            label-for="form-favorite-input"
-          >
-            <b-form-checkbox
+            <b-form-group
+              id="form-favorite-group"    
+              label="Recipe Favorite:"
+              label-for="form-edit-favorite-input"
+              description="favorite this recipe"
+              >
+              <b-form-checkbox
               id="form-favorite-input"
-              type="checkbox"
               v-model="createRecipeForm.favorite"
-              required
-            >
-            </b-form-checkbox>
-          </b-form-group>
-
-          <b-button type="submit" variant="outline-info">Submit</b-button>
-        </b-form>
-      </b-modal>
+              switch
+              ></b-form-checkbox>
+              </b-form-group>
+              <b-form-group
+              id="rating"
+              label="Recipe Rating:"
+              label-for="form-rating-input"
+              description="Rate this recipe from 1-5"
+              >
+              <b-form-rating
+              id="rating"
+              type="integer"
+              v-model="createRecipeForm.rating"
+              ></b-form-rating>
+              </b-form-group>
+              <b-button type="submit" variant="primary">Submit</b-button>
+              </b-form>
+          </b-modal>
       <!-- End of Modal for Create Recipe-->
       <!-- Start of Modal for Edit Recipe-->
       <b-modal
@@ -194,36 +206,37 @@
               placeholder="Recipe Steps"
               required
             >
-            <b-form-group 
-            id="form-edit-rate-group" 
-            label="Please select a value from the range 0 to 5" 
-            label-for="form-edit-rate-input">
-            <b-form-rating 
-            id="form-edit-rate-input" 
-            v-model="editAccountForm.rate" 
-            variant="warning" 
-            show-value>
-            </b-form-rating>
-          </b-form-group>
-
             </b-form-input>
           </b-form-group>
           <b-form-group
-            id="form-edit-favorite-group"
-            label="Recipe Favorite:"
-            label-for="form-edit-favorite-input"
+
+          id="form-favorite-group"
+          label="Recipe Favorite:"
+          label-for="form-favorite-input"
+          description="Let us know if you want to favorite this recipe"
           >
-            <b-form-checkbox
-              id="form-edit-favorite-input"
-              type="checkbox"
-              v-model="editRecipeForm.favorite"
-              required
-            >
-            </b-form-checkbox>
+          <b-form-checkbox
+          id="form-favorite-input"
+          v-model="updateRecipeForm.favorite"
+          switch
+          ></b-form-checkbox>
           </b-form-group>
-          <b-button type="submit" variant="outline-info">Update</b-button>
-        </b-form>
-      </b-modal>
+          <b-form-group
+          id="form-rating-group"
+          label="Recipe Rating:"
+          label-for="form-rating-input"
+          description="Rate this recipe from 1-5"
+          >
+          <b-form-rating
+          id="form-rating-input"
+          type="integer"
+          v-model="updateRecipeForm.rating"
+          ></b-form-rating>
+          </b-form-group>
+  
+          <b-button type="submit" variant="primary">Update</b-button>
+          </b-form>
+          </b-modal>
       <!-- End of Modal for Edit Account-->
     </div>
   </div>
@@ -279,7 +292,7 @@ export default {
         .then((response) => {
           this.RESTgetRecipes();
           // For message alert
-          this.message = "A new recipe for the book!";
+          this.message = "Recipe Created succesfully!";
           // To actually show the message
           this.showMessage = true;
           // To hide the message after 3 seconds
@@ -300,7 +313,7 @@ export default {
         .then((response) => {
           this.RESTgetRecipes();
           // For message alert
-          this.message = "A new recipe for the book!";
+          this.message = "Recipe Updated succesfully!";
           // To actually show the message
           this.showMessage = true;
           // To hide the message after 3 seconds
@@ -317,7 +330,7 @@ export default {
         .then((response) => {
           this.RESTgetRecipes();
           // For message alert
-          this.message = "Oh no! One recipe less!";
+          this.message = "Recipe Deleted succesfully!";
           // To actually show the message
           this.showMessage = true;
           // To hide the message after 3 seconds
