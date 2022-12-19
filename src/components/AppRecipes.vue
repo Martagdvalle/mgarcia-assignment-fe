@@ -36,7 +36,7 @@
                 <td>{{ recipe.name }}</td>
                 <td>{{ recipe.ingredients }}</td>
                 <td>{{ recipe.steps }}</td>
-                <td>{{ recipe.rating }}</td>
+                <td><b-form-rating v-model="account.rate" readonly variant="warning"> </b-form-rating></td>
                 <td>
                   <input type="checkbox" class="checkbox" v-model="recipe.favorite" />
                 </td>
@@ -63,7 +63,7 @@
             </tbody>
           </table>
           <footer class="text-center">
-            Copyright &copy; All Rights Reserved.
+            Copyright &copy; Marta García del Valle - All Rights Reserved.
           </footer>
         </div>
       </div>
@@ -115,20 +115,16 @@
               placeholder="Recipe Steps"
               required
             >
-            </b-form-input>
+            <b-form-group 
+            id="form-rate-group" 
+            label="Please select a value from the range 0 to 5:" 
+            label-for="form-rate-input">
+            <b-form-rating 
+            id="form-rate-input" 
+            v-model="createAccountForm.rate" variant="warning" show-value>
+            </b-form-rating>
           </b-form-group>
-          <b-form-group
-            id="form-rating-group"
-            label="Recipe Rating:"
-            label-for="form-rating-input"
-          >
-            <b-form-input
-              id="form-rating-input"
-              type="number"
-              v-model.number="createRecipeForm.rating"
-              placeholder="Recipe Rating"
-              required
-            >
+
             </b-form-input>
           </b-form-group>
           <b-form-group
@@ -198,20 +194,18 @@
               placeholder="Recipe Steps"
               required
             >
-            </b-form-input>
+            <b-form-group 
+            id="form-edit-rate-group" 
+            label="Please select a value from the range 0 to 5" 
+            label-for="form-edit-rate-input">
+            <b-form-rating 
+            id="form-edit-rate-input" 
+            v-model="editAccountForm.rate" 
+            variant="warning" 
+            show-value>
+            </b-form-rating>
           </b-form-group>
-          <b-form-group
-            id="form-edit-rating-group"
-            label="Recipe Rating:"
-            label-for="form-edit-rating-input"
-          >
-            <b-form-input
-              id="form-edit-rating-input"
-              type="number"
-              v-model.number="editRecipeForm.rating"
-              placeholder="Recipe Rating"
-              required
-            >
+
             </b-form-input>
           </b-form-group>
           <b-form-group
@@ -285,7 +279,7 @@ export default {
         .then((response) => {
           this.RESTgetRecipes();
           // For message alert
-          this.message = "Recipe Created succesfully!";
+          this.message = "A new recipe for the book!";
           // To actually show the message
           this.showMessage = true;
           // To hide the message after 3 seconds
@@ -306,7 +300,7 @@ export default {
         .then((response) => {
           this.RESTgetRecipes();
           // For message alert
-          this.message = "Recipe Updated succesfully!";
+          this.message = "A new recipe for the book!";
           // To actually show the message
           this.showMessage = true;
           // To hide the message after 3 seconds
@@ -323,7 +317,7 @@ export default {
         .then((response) => {
           this.RESTgetRecipes();
           // For message alert
-          this.message = "Recipe Deleted succesfully!";
+          this.message = "Oh no! One recipe less!";
           // To actually show the message
           this.showMessage = true;
           // To hide the message after 3 seconds
